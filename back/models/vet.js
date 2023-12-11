@@ -6,11 +6,26 @@ const vetSchema = mongoose.Schema({
     default:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGz-VYChmB0xBG5FHdLmZQe-CFiydR1ksIVousl32RYTnSIF1GAlSi-FbSqKm_6vEbI-g&usqp=CAU",
   },
-  name: String,
-  lastName: String,
-  age: String,
-  numordre: String,
-  tel: String,
+  name: {
+    type: String,
+    required: true,
+  },
+  lastName: {
+    type: String,
+    required: true,
+  },
+  age: {
+    type: String,
+    required: true,
+  },
+  numordre: {
+    type: String,
+    required: true,
+  },
+  tel: {
+    type: String,
+    required: true,
+  },
   cabAdresse: String,
   description: String,
   services: String,
@@ -21,6 +36,10 @@ const vetSchema = mongoose.Schema({
   password: {
     type: String,
     required: true,
+  },
+  role: {
+    type: String,
+    default: "vet",
   },
 });
 

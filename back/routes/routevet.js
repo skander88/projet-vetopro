@@ -6,7 +6,6 @@ const {
   registerValidation,
   loginValidation,
   validation,
-  getAllVet,
 } = require("../middlewares/registerValidation");
 
 //localhost:4000/authvet/registerVet
@@ -19,6 +18,13 @@ vetRoute.get("/myAccountVet", isAuth, (req, res) => {
   console.log(req.vet);
 });
 // http://localhost:4000/authvet/Veterinaires
-vetRoute.get("/Veterinaires", getAllVet);
+vetRoute.get("/Veterinaires", async (req, res) => {
+  try {
+    const users = await vetSchema.find();
+    res.status(200).json({ msg: "you get all the users", users });
+  } catch (error) {
+    console.error(error);
+  }
+});
 
 module.exports = vetRoute;

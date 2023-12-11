@@ -16,7 +16,7 @@ const RegisterClient = () => {
   const navigate = useNavigate();
   const logi = async (value) => {
     await postAuthClient(value);
-    navigate("/login");
+    //navigate("/login");
   };
 
   const handleReset = () => {

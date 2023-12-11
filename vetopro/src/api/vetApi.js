@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const postVet = async (value) => {
-  const addVet = await axios.post("localhost:4000/authvet/registerVet", {
+  const addVet = await axios.post("http://localhost:4000/authvet/registerVet", {
     ...value,
   });
 };

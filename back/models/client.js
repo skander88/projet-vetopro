@@ -6,11 +6,26 @@ const clientSchema = mongoose.Schema({
     default:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTk-DIhTXiFKfP16gOLcWSeLf-Dn6lV-wDrD0sG4C4GY3PT4g9DQTV8V7SF6OBYXz6Jt2I&usqp=CAU",
   },
-  name: String,
-  lastName: String,
-  age: String,
-  tel: String,
-  Adresse: String,
+  name: {
+    type: String,
+    required: true,
+  },
+  lastName: {
+    type: String,
+    required: true,
+  },
+  age: {
+    type: String,
+    required: true,
+  },
+  tel: {
+    type: String,
+    required: true,
+  },
+  Adresse: {
+    type: String,
+    required: true,
+  },
   email: {
     type: String,
     required: true,
@@ -21,8 +36,8 @@ const clientSchema = mongoose.Schema({
   },
   role: {
     type: String,
-    default: "user",
+    default: "client",
   },
 });
 
-module.exports = mongoose.model("clientSchema", clientSchema);
+module.exports = mongoose.model("Client", clientSchema);

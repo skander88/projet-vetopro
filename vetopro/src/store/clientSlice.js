@@ -1,10 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-const cliSlice = createSlice({
-  name: "cli",
+
+const clientSlice = createSlice({
+  name: "client",
   initialState: {
     photo:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTk-DIhTXiFKfP16gOLcWSeLf-Dn6lV-wDrD0sG4C4GY3PT4g9DQTV8V7SF6OBYXz6Jt2I&usqp=CAU",
-
     name: "client",
     lastName: "has an animal",
     age: "20",
@@ -15,11 +15,11 @@ const cliSlice = createSlice({
     role: "user",
   },
   reducers: {
-    setCli: (state, action) => {
+    setClient: (state, action) => {
       return action.payload;
     },
   },
 });
 
-export const { setCli } = cliSlice.actions;
-export default cliSlice.reducer;
+export const { setClient } = clientSlice.actions;
+export default clientSlice.reducer;

@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./Login.css";
-const Login = () => {
+const Logincl = () => {
   const navigate = useNavigate();
 
   // login formulaire
@@ -14,13 +14,13 @@ const Login = () => {
   const handelLogin = async (value) => {
     try {
       const res = await axios.post(
-        "http://localhost:4000/authvet/loginVet",
+        "http://localhost:4000/authclient/login",
         value
       );
       console.log("res:", res.data.token);
       await localStorage.setItem("token", res.data.token);
       //await alert("test u did it ");
-      navigate("/app/privateRoute");
+      navigate("/app/privateRoute2");
     } catch (err) {
       console.log(err);
     }
@@ -97,7 +97,7 @@ const Login = () => {
               alt="illustration"
               className="illustration"
             />
-            <h1 className="opacity">Welcome back Doc !</h1>
+            <h1 className="opacity">Welcome back !</h1>
             <form>
               <input
                 type="text"
@@ -134,4 +134,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Logincl;
