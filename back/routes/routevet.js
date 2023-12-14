@@ -2,6 +2,7 @@ const express = require("express");
 const vetRoute = express.Router();
 const { register, login } = require("../controllers/vetControllers");
 const { isAuth } = require("../middlewares/vetAuth");
+const vetSchema = require("../models/vet");
 const {
   registerValidation,
   loginValidation,
@@ -21,7 +22,7 @@ vetRoute.get("/myAccountVet", isAuth, (req, res) => {
 vetRoute.get("/Veterinaires", async (req, res) => {
   try {
     const users = await vetSchema.find();
-    res.status(200).json({ msg: "you get all the users", users });
+    res.status(200).json({ msg: "you get all the vets", users });
   } catch (error) {
     console.error(error);
   }

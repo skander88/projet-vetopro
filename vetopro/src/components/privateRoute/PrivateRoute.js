@@ -3,7 +3,7 @@ import { useNavigate } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
 import Login from "../login/Login";
 import NavbarVet from "../navbar/NavbarVet";
-import { fetchAllVet } from "../../api/vetApi";
+import { fetchVet } from "../../api/vetApi";
 import { setVet } from "../../store/vetSlice";
 
 const PrivateRoute2 = () => {
@@ -16,7 +16,7 @@ const PrivateRoute2 = () => {
   // Fetch the authenticated Vet
   const getVet = async () => {
     try {
-      const data = await fetchAllVet();
+      const data = await fetchVet();
       dispatch(setVet(data));
     } catch (error) {
       console.error("Error fetching Vet:", error);

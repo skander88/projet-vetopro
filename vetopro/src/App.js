@@ -4,8 +4,8 @@ import Login from "./components/login/Login";
 import Logincl from "./components/login/Logincl";
 import { Routes, Route } from "react-router-dom";
 import PrivateRoute from "./components/privateRoute/PrivateRoute";
-import AnnonceList from "./components/annonces/AnnonceList";
-import AnnonceAdd from "./components/annonces/AnnonceCard";
+//import AnnonceList from "./components/annonces/AnnonceList";
+//import AnnonceAdd from "./components/annonces/AnnonceCard";
 import Homepage from "./components/homepage/Homepage";
 import PrivateRoute2 from "./components/privateRoute/PrivateRoute2";
 
@@ -14,8 +14,6 @@ function App() {
     <div>
       <Routes>
         <Route path="/" element={<Homepage />} />
-
-        {/*<Route path="/app/privateRoute" element={<PrivateRoute />} />*/}
       </Routes>
 
       {/* routes de partie client  */}
@@ -24,7 +22,7 @@ function App() {
         <Route path="/loginClient" element={<Logincl />} />
         <Route path="/app/privateRoute" element={<PrivateRoute />} />
 
-        {/*<Route path="/memoAdd" element={<MemoAdd />} />*/}
+        {/*<Route path="/Add" element={<Add />} />*/}
       </Routes>
       {/* routes de partie vet  */}
       <Routes>

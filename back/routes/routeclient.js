@@ -13,8 +13,8 @@ const {
 } = require("../middlewares/registerValidation");
 // http://localhost:4000/authclient/registerClient
 clientRoute.post("/registerClient", registerValidation, validation, register);
-// http://localhost:4000/authclient/login
-clientRoute.post("/login", loginValidation, validation, login);
+// http://localhost:4000/authclient/loginClient
+clientRoute.post("/loginClient", loginValidation, validation, login);
 // http://localhost:4000/authclient/myAccountClient
 clientRoute.get("/myAccountClient", isAuth, (req, res) => {
   res.send(req.client);

@@ -25,111 +25,76 @@ const Login = () => {
       console.log(err);
     }
   };
-
-  useEffect(() => {
-    const themes = [
-      {
-        background: "#1A1A2E",
-        color: "#FFFFFF",
-        primaryColor: "#0F3460",
-      },
-      {
-        background: "#461220",
-        color: "#FFFFFF",
-        primaryColor: "#E94560",
-      },
-      {
-        background: "#192A51",
-        color: "#FFFFFF",
-        primaryColor: "#967AA1",
-      },
-      {
-        background: "#F7B267",
-        color: "#000000",
-        primaryColor: "#F4845F",
-      },
-      {
-        background: "#F25F5C",
-        color: "#000000",
-        primaryColor: "#642B36",
-      },
-      {
-        background: "#231F20",
-        color: "#FFF",
-        primaryColor: "#BB4430",
-      },
-    ];
-
-    const setTheme = (theme) => {
-      document.documentElement.style.setProperty(
-        "--background",
-        theme.background
-      );
-      document.documentElement.style.setProperty("--color", theme.color);
-      document.documentElement.style.setProperty(
-        "--primary-color",
-        theme.primaryColor
-      );
-    };
-
-    const displayThemeButtons = () => {
-      const btnContainer = document.querySelector(".theme-btn-container");
-      themes.forEach((theme) => {
-        const div = document.createElement("div");
-        div.className = "theme-btn";
-        div.style.cssText = `background: ${theme.background}; width: 25px; height: 25px`;
-        btnContainer.appendChild(div);
-        div.addEventListener("click", () => setTheme(theme));
-      });
-    };
-
-    displayThemeButtons();
-  }, []); // Run only once after initial render
+  const handleReset = () => {
+    // Reset the form fields
+    setEmail("");
+    setPassword("");
+  };
 
   return (
     <div className="body8">
-      <section className="container">
-        <div className="login-container">
-          <div className="circle circle-one"></div>
-          <div className="form-container">
-            <img
-              src="https://raw.githubusercontent.com/hicodersofficial/glassmorphism-login-form/master/assets/illustration.png"
-              alt="illustration"
-              className="illustration"
-            />
-            <h1 className="opacity">Welcome back Doc !</h1>
-            <form>
-              <input
-                type="text"
-                required=""
-                placeholder="Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+      <div className="body89">
+        <div className="signup-container">
+          <div className="left-container2">
+            <h1>
+              <i className="fas fa-paw" />
+              Let's login !
+            </h1>
+
+            <div className="puppy">
+              <img
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGz-VYChmB0xBG5FHdLmZQe-CFiydR1ksIVousl32RYTnSIF1GAlSi-FbSqKm_6vEbI-g&usqp=CAU"
+                alt="registerPhoto"
               />
-              <input
-                type="password"
-                className="pass-key"
-                required=""
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </form>
-            <div className="register-forget opacity">
-              <a href="/register">Register</a>
-              <button
-                type="button"
-                class="button-8"
-                onClick={() => handelLogin({ email, password })}
-              >
-                Login
-              </button>
             </div>
           </div>
-          <div className="circle circle-two"></div>
+          <div className="right-container2">
+            <header>
+              <h1>Welcome back Doc !</h1>
+              <br />
+
+              <div className="set2">
+                <input
+                  type="text"
+                  required=""
+                  placeholder="Email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+                <br />
+                <br />
+                <input
+                  type="password"
+                  className="pass-key"
+                  required=""
+                  placeholder="Password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </div>
+            </header>
+            <footer>
+              <div className="set">
+                <button type="reset" onClick={handleReset}>
+                  Reset
+                </button>
+                <a href="/registerVet">Register</a>
+                <button
+                  id="next"
+                  onClick={() =>
+                    handelLogin({
+                      email,
+                      password,
+                    })
+                  }
+                >
+                  Login
+                </button>
+              </div>
+            </footer>
+          </div>
         </div>
-        <div className="theme-btn-container"></div>
-      </section>
+      </div>
     </div>
   );
 };

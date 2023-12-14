@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const postAuthClient = async (value) => {
+export const postClient = async (value) => {
   const addClient = await axios.post(
     "http://localhost:4000/authclient/registerClient",
     {
@@ -9,7 +9,7 @@ export const postAuthClient = async (value) => {
   );
 };
 
-export const fetchAuthClient = async () => {
+export const fetchClient = async () => {
   const token = localStorage.getItem("token");
   const { data } = await axios.get(
     "http://localhost:4000/authclient/myAccountClient",
@@ -19,7 +19,7 @@ export const fetchAuthClient = async () => {
   );
   return data;
 };
-export const fetchAllAuthClient = async () => {
+export const fetchAllClient = async () => {
   const { data } = await axios.get("http://localhost:4000/authclient/clients");
   return data;
 };

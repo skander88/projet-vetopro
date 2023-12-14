@@ -6,6 +6,7 @@ exports.register = async (req, res) => {
   try {
     const { name, email, password, tel, numordre, age } = req.body;
     // Check if tel, numordre, age are present and not empty
+
     if (!tel || !numordre || !age) {
       return res
         .status(400)
@@ -18,7 +19,7 @@ exports.register = async (req, res) => {
         msg: "This vet is already existent, please login!",
       });
     }
-    const newVet = new vetSchema(req.body); // Use newVet instead of new vetSchema
+    const newVet = await new vetSchema(req.body);
     const saltRounds = 10;
     const salt = bcrypt.genSaltSync(saltRounds);
     const hash = bcrypt.hashSync(password, salt);

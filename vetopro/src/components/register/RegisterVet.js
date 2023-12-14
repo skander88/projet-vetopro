@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { postVet } from "../../api/vetApi";
 
 const RegisterVet = () => {
-  const [photo, setPhoto] = useState("");
   const [name, setName] = useState("");
   const [lastName, setLastName] = useState("");
   const [age, setAge] = useState("");
@@ -29,17 +28,10 @@ const RegisterVet = () => {
     setEmail("");
     setLastName("");
     setPassword("");
-    setPhoto(null);
     setAge("");
     setNumordre("");
     setDescription("");
     setServices("");
-  };
-
-  const handlePhotoChange = (e) => {
-    // Handle file input changes
-    const file = e.target.files[0];
-    setPhoto(file);
   };
 
   return (
@@ -54,6 +46,7 @@ const RegisterVet = () => {
             <img
               src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGz-VYChmB0xBG5FHdLmZQe-CFiydR1ksIVousl32RYTnSIF1GAlSi-FbSqKm_6vEbI-g&usqp=CAU"
               alt="registerPhoto"
+              className="imgvet"
             />
           </div>
         </div>
@@ -71,15 +64,14 @@ const RegisterVet = () => {
                   onChange={(e) => setName(e.target.value)}
                 />
               </div>
-              <div className="pets-photo">
-                <label htmlFor="pets-upload">Photo (not required)</label>
-                <br />
+              <div className="pets-spayed-neutered">
+                <label htmlFor="pets-breed">Tel</label>
                 <input
-                  type="file"
-                  id="pets-upload"
-                  accept="image/*"
-                  onChange={handlePhotoChange}
-                  className="photcont"
+                  type="text"
+                  id="pets-breed"
+                  placeholder="Please enter your phone number"
+                  value={tel}
+                  onChange={(e) => setTel(e.target.value)}
                 />
               </div>
             </div>
@@ -94,14 +86,14 @@ const RegisterVet = () => {
                   onChange={(e) => setLastName(e.target.value)}
                 />
               </div>
-              <div className="pets-weight">
-                <label htmlFor="pets-breed">Cabinet Adresse</label>
+              <div className="pets-spayed-neutered">
+                <label htmlFor="pets-breed">Description</label>
                 <input
                   type="text"
                   id="pets-breed"
                   placeholder="Not required"
-                  value={cabAdresse}
-                  onChange={(e) => setCabAdresse(e.target.value)}
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
                 />
               </div>
             </div>
@@ -117,14 +109,14 @@ const RegisterVet = () => {
                   onChange={(e) => setAge(e.target.value)}
                 />
               </div>
-              <div className="pets-spayed-neutered">
-                <label htmlFor="pets-breed">Tel</label>
+              <div className="pets-weight">
+                <label htmlFor="pets-breed">Services</label>
                 <input
                   type="text"
                   id="pets-breed"
-                  placeholder="Please enter your phone number"
-                  value={tel}
-                  onChange={(e) => setTel(e.target.value)}
+                  placeholder="Not required"
+                  value={services}
+                  onChange={(e) => setServices(e.target.value)}
                 />
               </div>
             </div>
@@ -139,19 +131,6 @@ const RegisterVet = () => {
                   onChange={(e) => setNumordre(e.target.value)}
                 />
               </div>
-
-              <div className="pets-spayed-neutered">
-                <label htmlFor="pets-breed">Description</label>
-                <input
-                  type="text"
-                  id="pets-breed"
-                  placeholder="Not required"
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
-                />
-              </div>
-            </div>
-            <div className="set">
               <div className="pets-birthday">
                 <label htmlFor="pets-breed">E-mail</label>
                 <input
@@ -162,19 +141,18 @@ const RegisterVet = () => {
                   onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
-
+            </div>
+            <div className="set">
               <div className="pets-weight">
-                <label htmlFor="pets-breed">Services</label>
+                <label htmlFor="pets-breed">Cabinet Adresse</label>
                 <input
                   type="text"
                   id="pets-breed"
                   placeholder="Not required"
-                  value={services}
-                  onChange={(e) => setServices(e.target.value)}
+                  value={cabAdresse}
+                  onChange={(e) => setCabAdresse(e.target.value)}
                 />
               </div>
-            </div>
-            <div className="set">
               <div className="pets-spayed-neutered">
                 <label htmlFor="pets-breed">Password</label>
                 <input
@@ -194,7 +172,21 @@ const RegisterVet = () => {
               </button>
               <button
                 id="next"
-                onClick={() => logi({ name, lastName, email, password })}
+                onClick={() =>
+                  logi({
+                    name,
+                    lastName,
+                    email,
+                    password,
+
+                    tel,
+                    age,
+                    cabAdresse,
+                    numordre,
+                    services,
+                    description,
+                  })
+                }
               >
                 Register
               </button>

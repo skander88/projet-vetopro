@@ -67,6 +67,13 @@
   z-index: 1;
 }
 
+.left-container .imgvet {
+	filter: sepia(100%);
+  width: 80%;
+  margin-left: 30px;
+  margin-bottom: 200px;
+   /* Adjust the size as needed */
+}
 .left-container img {
 	filter: sepia(100%);
   width: 80%;

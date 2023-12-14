@@ -8,23 +8,18 @@ const clientSchema = mongoose.Schema({
   },
   name: {
     type: String,
-    required: true,
   },
   lastName: {
     type: String,
-    required: true,
   },
   age: {
     type: String,
-    required: true,
   },
   tel: {
     type: String,
-    required: true,
   },
   Adresse: {
     type: String,
-    required: true,
   },
   email: {
     type: String,

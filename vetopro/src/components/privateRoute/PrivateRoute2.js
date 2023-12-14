@@ -3,7 +3,7 @@ import { useNavigate } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
 import Logincl from "../login/Logincl";
 import Navbar from "../navbar/Navbar";
-import { fetchAuthClient } from "../../api/clientApi";
+import { fetchClient } from "../../api/clientApi";
 import { setClient } from "../../store/clientSlice";
 
 const PrivateRoute2 = () => {
@@ -16,7 +16,7 @@ const PrivateRoute2 = () => {
   // Fetch the authenticated client
   const getClient = async () => {
     try {
-      const data = await fetchAuthClient();
+      const data = await fetchClient();
       dispatch(setClient(data));
     } catch (error) {
       console.error("Error fetching client:", error);

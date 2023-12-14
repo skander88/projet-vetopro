@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import "./Register.css";
 import { useNavigate } from "react-router-dom";
-import { postAuthClient } from "../../api/clientApi";
+import { postClient } from "../../api/clientApi";
 
 const RegisterClient = () => {
   const [photo, setPhoto] = useState("");
   const [name, setName] = useState("");
   const [lastName, setLastName] = useState("");
   const [age, setAge] = useState("");
+  const [tel, setTel] = useState("");
   const [adresse, setAdresse] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -15,8 +16,8 @@ const RegisterClient = () => {
   // navigation register ====> login
   const navigate = useNavigate();
   const logi = async (value) => {
-    await postAuthClient(value);
-    //navigate("/login");
+    await postClient(value);
+    navigate("/loginClient");
   };
 
   const handleReset = () => {
@@ -27,6 +28,7 @@ const RegisterClient = () => {
     setPassword("");
     setPhoto(null);
     setAge("");
+    setTel("");
   };
 
   const handlePhotoChange = (e) => {
@@ -88,13 +90,13 @@ const RegisterClient = () => {
                 />
               </div>
               <div className="pets-birthday">
-                <label htmlFor="pets-breed">E-mail</label>
+                <label htmlFor="pets-breed">Adresse</label>
                 <input
                   type="text"
                   id="pets-breed"
-                  placeholder="Please enter your email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Please enter your Adresse"
+                  value={adresse}
+                  onChange={(e) => setAdresse(e.target.value)}
                 />
               </div>
             </div>
@@ -110,6 +112,28 @@ const RegisterClient = () => {
                 />
               </div>
               <div className="pets-spayed-neutered">
+                <label htmlFor="pets-breed">E-mail</label>
+                <input
+                  type="text"
+                  id="pets-breed"
+                  placeholder="Please enter your email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </div>
+            </div>
+            <div className="set">
+              <div className="pets-weight">
+                <label htmlFor="pets-breed">Tel</label>
+                <input
+                  type="text"
+                  id="pets-breed"
+                  placeholder="Please enter your phone number"
+                  value={tel}
+                  onChange={(e) => setTel(e.target.value)}
+                />
+              </div>
+              <div className="pets-spayed-neutered">
                 <label htmlFor="pets-breed">Password</label>
                 <input
                   type="text"
@@ -120,17 +144,6 @@ const RegisterClient = () => {
                 />
               </div>
             </div>
-
-            <div className="pets-weight">
-              <label htmlFor="pets-breed">Adresse</label>
-              <input
-                type="text"
-                id="pets-breed"
-                placeholder="Please enter your Adresse"
-                value={adresse}
-                onChange={(e) => setAdresse(e.target.value)}
-              />
-            </div>
           </header>
           <footer>
             <div className="set">
@@ -139,7 +152,18 @@ const RegisterClient = () => {
               </button>
               <button
                 id="next"
-                onClick={() => logi({ name, lastName, email, password })}
+                onClick={() =>
+                  logi({
+                    name,
+                    lastName,
+                    email,
+                    password,
+                    photo,
+                    tel,
+                    age,
+                    adresse,
+                  })
+                }
               >
                 Register
               </button>
