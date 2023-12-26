@@ -2,6 +2,8 @@ import RegisterClient from "./components/register/RegisterClient";
 import RegisterVet from "./components/register/RegisterVet";
 import Login from "./components/login/Login";
 import Logincl from "./components/login/Logincl";
+import PasLogin from "./components/passassion/PasLogin";
+import PasRegis from "./components/passassion/PasRegis";
 import { Routes, Route } from "react-router-dom";
 import PrivateRoute from "./components/privateRoute/PrivateRoute";
 //import AnnonceList from "./components/annonces/AnnonceList";
@@ -20,6 +22,8 @@ function App() {
       <Routes>
         <Route path="/registerClient" element={<RegisterClient />} />
         <Route path="/loginClient" element={<Logincl />} />
+        <Route path="/pasRegis" element={<PasRegis />} />
+        <Route path="/paslogin" element={<PasLogin />} />
         <Route path="/app/privateRoute" element={<PrivateRoute />} />
 
         {/*<Route path="/Add" element={<Add />} />*/}

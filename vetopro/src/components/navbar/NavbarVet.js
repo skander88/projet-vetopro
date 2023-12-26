@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "../images + logos/logo.png";
+
 import "./Navbar.css";
 
 const Navbar = ({ vet, logout }) => {
@@ -9,7 +9,7 @@ const Navbar = ({ vet, logout }) => {
         <nav>
           <div className="wrapper">
             <div className="logo">
-              <img src={logo} alt="logo" />
+              <img src="/logo.png" alt="logo" />
             </div>
 
             <ul className="nav-links">

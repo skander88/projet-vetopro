@@ -1,7 +1,7 @@
 import React from "react";
 
 function AnnonceList() {
-  return <div>list</div>;
+  return <div></div>;
 }
 
 export default AnnonceList;

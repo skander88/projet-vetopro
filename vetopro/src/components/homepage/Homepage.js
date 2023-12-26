@@ -1,1276 +1,697 @@
-import React from "react";
-
-import VetList from "../Veterinaires/VetList";
+import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import PasLogin from "../passassion/PasLogin";
+import PasRegis from "../passassion/PasRegis";
+import { useNavigate } from "react-router-dom";
+import "./Homepage.css";
+import "./Homepage2.css";
+/*import $ from "jquery";
+import "owl.carousel/dist/assets/owl.carousel.css";
+import "owl.carousel/dist/assets/owl.theme.default.css";
+import "owl.carousel";*/
+import { setVet } from "../../store/vetSlice";
+import { fetchAllVet } from "../../api/vetApi";
 
-function Homepage() {
+const Homepage = () => {
+  const navigate = useNavigate();
+  const veto = useSelector((state) => state.vet);
+  console.log("V", veto);
+
+  const dispatch = useDispatch();
+  const getAll = async () => {
+    const data = await fetchAllVet();
+    console.log("je viens de la bd", data.users);
+    dispatch(setVet(data.users));
+  };
+
+  useEffect(() => {
+    getAll();
+  }, []);
+  {
+    /*useEffect(() => {
+    // Dropdown on mouse hover
+    function toggleNavbarMethod() {
+      if (window.innerWidth > 992) {
+        $(".navbar .dropdown")
+          .on("mouseover", function () {
+            $(".dropdown-toggle", this).trigger("click");
+          })
+          .on("mouseout", function () {
+            $(".dropdown-toggle", this).trigger("click").blur();
+          });
+      } else {
+        $(".navbar .dropdown").off("mouseover").off("mouseout");
+      }
+    }
+    toggleNavbarMethod();
+    $(window).resize(toggleNavbarMethod);
+
+    // Team carousel
+    $(".team-carousel, .related-carousel").owlCarousel({
+      autoplay: true,
+      smartSpeed: 1000,
+      margin: 45,
+      dots: false,
+      loop: true,
+      nav: true,
+      navText: [
+        '<i class="bi bi-arrow-left"></i>',
+        '<i class="bi bi-arrow-right"></i>',
+      ],
+      responsive: {
+        0: {
+          items: 1,
+        },
+        992: {
+          items: 2,
+        },
+      },
+    });
+  }, []);*/
+  }
   return (
-    <div id="top">
-      <header className="header" data-header>
+    <div className="body111">
+      {/* Header Start */}
+      {/*Navbar Start*/}
+      <div className="container-fluid sticky-top bg-white shadow-sm mb-5">
         <div className="container">
-          <button
-            className="nav-toggle-btn"
-            aria-label="toggle manu"
-            data-nav-toggler
-          >
-            <ion-icon
-              name="menu-outline"
-              aria-hidden="true"
-              className="menu-icon"
-            ></ion-icon>
-            <ion-icon
-              name="close-outline"
-              aria-label="true"
-              className="close-icon"
-            ></ion-icon>
-          </button>
-
-          <a href="#" className="logo">
-            Kitter
-          </a>
-
-          <nav className="navbar" data-navbar>
-            <ul className="navbar-list">
-              <li className="navbar-item">
-                <a href="#home" className="navbar-link" data-nav-link>
-                  Home
-                </a>
-              </li>
-
-              <li className="navbar-item">
-                <a href="#shop" className="navbar-link" data-nav-link>
-                  Shop
-                </a>
-              </li>
-
-              <li className="navbar-item">
-                <a href="#" className="navbar-link" data-nav-link>
-                  Collections
-                </a>
-              </li>
-
-              <li className="navbar-item">
-                <a href="#" className="navbar-link" data-nav-link>
-                  Blogs
-                </a>
-              </li>
-
-              <li className="navbar-item">
-                <a href="#" className="navbar-link" data-nav-link>
-                  Contact
-                </a>
-              </li>
-            </ul>
-
-            <a href="#" className="navbar-action-btn">
-              Log In
-            </a>
-          </nav>
-
-          <div className="header-actions">
-            <button className="action-btn" aria-label="Search">
-              <ion-icon name="search-outline" aria-hidden="true"></ion-icon>
-            </button>
-
-            <button className="action-btn user" aria-label="User">
-              <ion-icon name="person-outline" aria-hidden="true"></ion-icon>
-            </button>
-
-            <button className="action-btn" aria-label="cart">
-              <ion-icon name="bag-handle-outline" aria-hidden="true"></ion-icon>
-
-              <span className="btn-badge">0</span>
-            </button>
-          </div>
-        </div>
-      </header>
-
-      <main>
-        <article>
-          <section
-            className="section hero has-bg-image"
-            id="home"
-            aria-label="home"
-            style={{ backgroundImage: "url('/images/hero-banner.jpg')" }}
-          >
-            <div className="container">
-              <h1 className="h1 hero-title">
-                <span className="span">High Quality</span> Pet Food
-              </h1>
-
-              <p className="hero-text">Sale up to 40% off today</p>
-
-              <a href="#" className="btn">
-                Shop Now
+          <nav className="navbar navbar-expand-lg bg-white navbar-light py-2 py-lg-0">
+            <div className="d-flex align-items-center">
+              <a href="#" className="navbar-brand">
+                <img
+                  src="logo.png"
+                  alt="Vétopro Logo"
+                  style={{ width: "120px" }}
+                />
               </a>
             </div>
-          </section>
 
-          <section className="section category" aria-label="category">
-            <div className="container">
-              <h2 className="h2 section-title">
-                <span className="span">Top</span> categories
-              </h2>
-
-              <ul className="has-scrollbar">
-                <li className="scrollbar-item">
-                  <div className="category-card">
-                    <figure
-                      className="card-banner img-holder"
-                      style={{ width: 330, height: 300 }}
-                    >
-                      <img
-                        src="/images/category-1.jpg"
-                        width="330"
-                        height="300"
-                        loading="lazy"
-                        alt="Cat Food"
-                        className="img-cover"
-                      />
-                    </figure>
-
-                    <h3 className="h3">
-                      <a href="#" className="card-title">
-                        Cat Food
-                      </a>
-                    </h3>
-                  </div>
-                </li>
-
-                <li className="scrollbar-item">
-                  <div className="category-card">
-                    <figure
-                      className="card-banner img-holder"
-                      style={{ width: 330, height: 300 }}
-                    >
-                      <img
-                        src="/images/category-2.jpg"
-                        width="330"
-                        height="300"
-                        loading="lazy"
-                        alt="Cat Toys"
-                        className="img-cover"
-                      />
-                    </figure>
-
-                    <h3 className="h3">
-                      <a href="#" className="card-title">
-                        Cat Toys
-                      </a>
-                    </h3>
-                  </div>
-                </li>
-
-                <li className="scrollbar-item">
-                  <div className="category-card">
-                    <figure
-                      className="card-banner img-holder"
-                      style={{ width: 330, height: 300 }}
-                    >
-                      <img
-                        src="/images/category-3.jpg"
-                        width="330"
-                        height="300"
-                        loading="lazy"
-                        alt="Dog Food"
-                        className="img-cover"
-                      />
-                    </figure>
-
-                    <h3 className="h3">
-                      <a href="#" className="card-title">
-                        Dog Food
-                      </a>
-                    </h3>
-                  </div>
-                </li>
-
-                <li className="scrollbar-item">
-                  <div className="category-card">
-                    <figure
-                      className="card-banner img-holder"
-                      style={{ width: 330, height: 300 }}
-                    >
-                      <img
-                        src="/images/category-4.jpg"
-                        width="330"
-                        height="300"
-                        loading="lazy"
-                        alt="Dog Toys"
-                        className="img-cover"
-                      />
-                    </figure>
-
-                    <h3 className="h3">
-                      <a href="#" className="card-title">
-                        Dog Toys
-                      </a>
-                    </h3>
-                  </div>
-                </li>
-
-                <li className="scrollbar-item">
-                  <div className="category-card">
-                    <figure
-                      className="card-banner img-holder"
-                      style={{ width: 330, height: 300 }}
-                    >
-                      <img
-                        src="/images/category-5.jpg"
-                        width="330"
-                        height="300"
-                        loading="lazy"
-                        alt="Dog Sumpplements"
-                        className="img-cover"
-                      />
-                    </figure>
-
-                    <h3 className="h3">
-                      <a href="#" className="card-title">
-                        Dog Sumpplements
-                      </a>
-                    </h3>
-                  </div>
-                </li>
-              </ul>
-            </div>
-          </section>
-
-          <section className="section offer" aria-label="offer">
-            <div className="container">
-              <ul className="grid-list">
-                <li>
-                  <div
-                    className="offer-card has-bg-image img-holder"
-                    style={{
-                      backgroundImage: "url('/images/offer-banner-1.jpg')",
-                      "--width": 540,
-                      "--height": 374,
-                    }}
-                  >
-                    <p className="card-subtitle">
-                      Selected Items. Online Only.
-                    </p>
-
-                    <h3 className="h3 card-title">
-                      Hot Summer <span className="span">Deals</span>
-                    </h3>
-
-                    <a href="#" className="btn">
-                      Read More
-                    </a>
-                  </div>
-                </li>
-
-                <li>
-                  <div
-                    className="offer-card has-bg-image img-holder"
-                    style={{
-                      backgroundImage: "url('/images/offer-banner-1.jpg')",
-                      "--width": 540,
-                      "--height": 374,
-                    }}
-                  >
-                    <p className="card-subtitle">Treats Grooming</p>
-
-                    <h3 className="h3 card-title">
-                      Spoil your true <span className="span">love</span>
-                    </h3>
-
-                    <a href="#" className="btn">
-                      Read More
-                    </a>
-                  </div>
-                </li>
-
-                <li>
-                  <div
-                    className="offer-card has-bg-image img-holder"
-                    style={{
-                      backgroundImage: "url('/images/offer-banner-1.jpg')",
-                      "--width": 540,
-                      "--height": 374,
-                    }}
-                  >
-                    <p className="card-subtitle">Our Brand You Will Love</p>
-
-                    <h3 className="h3 card-title">
-                      New in this <span className="span">year</span>
-                    </h3>
-
-                    <a href="#" className="btn">
-                      Read More
-                    </a>
-                  </div>
-                </li>
-              </ul>
-            </div>
-          </section>
-
-          <section className="section product" id="shop" aria-label="product">
-            <div className="container">
-              <h2 className="h2 section-title">
-                <span className="span">Best</span> Seller
-              </h2>
-
-              <ul className="grid-list">
-                <li>
-                  <div className="product-card">
-                    <div
-                      className="card-banner img-holder"
-                      style={{ width: "360px", height: "360px" }}
-                    >
-                      <img
-                        src="/images/product-1.jpg"
-                        width="360"
-                        height="360"
-                        loading="lazy"
-                        alt="Commodo leo sed porta"
-                        className="img-cover default"
-                      />
-                      <img
-                        src="/images/product-1_0.jpg"
-                        width="360"
-                        height="360"
-                        loading="lazy"
-                        alt="Commodo leo sed porta"
-                        className="img-cover hover"
-                      />
-
-                      <button
-                        className="card-action-btn"
-                        aria-label="add to card"
-                        title="Add To Card"
-                      >
-                        <ion-icon
-                          name="bag-add-outline"
-                          aria-hidden="true"
-                        ></ion-icon>
-                      </button>
-                    </div>
-
-                    <div className="card-content">
-                      <div className="wrapper">
-                        <div className="rating-wrapper">
-                          <ion-icon name="star" aria-hidden="true"></ion-icon>
-                          <ion-icon name="star" aria-hidden="true"></ion-icon>
-                          <ion-icon name="star" aria-hidden="true"></ion-icon>
-                          <ion-icon name="star" aria-hidden="true"></ion-icon>
-                          <ion-icon name="star" aria-hidden="true"></ion-icon>
-                        </div>
-
-                        <span className="span">(1)</span>
-                      </div>
-
-                      <h3 className="h3">
-                        <a href="#" className="card-title">
-                          Commodo leo sed porta
-                        </a>
-                      </h3>
-
-                      <data className="card-price" value="15">
-                        $15.00
-                      </data>
-                    </div>
-                  </div>
-                </li>
-
-                <li>
-                  <div className="product-card">
-                    <div
-                      className="card-banner img-holder"
-                      style={{ width: "360px", height: "360px" }}
-                    >
-                      <img
-                        src="/images/product-2.jpg"
-                        width="360"
-                        height="360"
-                        loading="lazy"
-                        alt="Purus consequat congue sit"
-                        className="img-cover default"
-                      />
-                      <img
-                        src="/images/product-2_0.jpg"
-                        width="360"
-                        height="360"
-                        loading="lazy"
-                        alt="Purus consequat congue sit"
-                        className="img-cover hover"
-                      />
-
-                      <button
-                        className="card-action-btn"
-                        aria-label="add to card"
-                        title="Add To Card"
-                      >
-                        <ion-icon
-                          name="bag-add-outline"
-                          aria-hidden="true"
-                        ></ion-icon>
-                      </button>
-                    </div>
-
-                    <div className="card-content">
-                      <div className="wrapper">
-                        <div className="rating-wrapper gray">
-                          <ion-icon name="star" aria-hidden="true"></ion-icon>
-                          <ion-icon name="star" aria-hidden="true"></ion-icon>
-                          <ion-icon name="star" aria-hidden="true"></ion-icon>
-                          <ion-icon name="star" aria-hidden="true"></ion-icon>
-                          <ion-icon name="star" aria-hidden="true"></ion-icon>
-                        </div>
-
-                        <span className="span">(0)</span>
-                      </div>
-
-                      <h3 className="h3">
-                        <a href="#" className="card-title">
-                          Purus consequat congue sit
-                        </a>
-                      </h3>
-
-                      <data className="card-price" value="45">
-                        $45.00
-                      </data>
-                    </div>
-                  </div>
-                </li>
-
-                <li>
-                  <div className="product-card">
-                    <div
-                      className="card-banner img-holder"
-                      style={{ width: "360px", height: "360px" }}
-                    >
-                      <img
-                        src="/images/product-3.jpg"
-                        width="360"
-                        height="360"
-                        loading="lazy"
-                        alt="Morbi vel arcu scelerisque"
-                        className="img-cover default"
-                      />
-                      <img
-                        src="/images/product-3_0.jpg"
-                        width="360"
-                        height="360"
-                        loading="lazy"
-                        alt="Morbi vel arcu scelerisque"
-                        className="img-cover hover"
-                      />
-
-                      <button
-                        className="card-action-btn"
-                        aria-label="add to card"
-                        title="Add To Card"
-                      >
-                        <ion-icon
-                          name="bag-add-outline"
-                          aria-hidden="true"
-                        ></ion-icon>
-                      </button>
-                    </div>
-
-                    <div className="card-content">
-                      <div className="wrapper">
-                        <div className="rating-wrapper gray">
-                          <ion-icon name="star" aria-hidden="true"></ion-icon>
-                          <ion-icon name="star" aria-hidden="true"></ion-icon>
-                          <ion-icon name="star" aria-hidden="true"></ion-icon>
-                          <ion-icon name="star" aria-hidden="true"></ion-icon>
-                          <ion-icon name="star" aria-hidden="true"></ion-icon>
-                        </div>
-
-                        <span className="span">(0)</span>
-                      </div>
-
-                      <h3 className="h3">
-                        <a href="#" className="card-title">
-                          Morbi vel arcu scelerisque
-                        </a>
-                      </h3>
-
-                      <data className="card-price" value="45">
-                        $45.00
-                      </data>
-                    </div>
-                  </div>
-                </li>
-
-                <li>
-                  <div className="product-card">
-                    <div
-                      className="card-banner img-holder"
-                      style={{ width: "360px", height: "360px" }}
-                    >
-                      <img
-                        src="/images/product-4.jpg"
-                        width="360"
-                        height="360"
-                        loading="lazy"
-                        alt="Morbi vel arcu scelerisque"
-                        className="img-cover default"
-                      />
-
-                      <img
-                        src="/images/product-4_0.jpg"
-                        width="360"
-                        height="360"
-                        loading="lazy"
-                        alt="Morbi vel arcu scelerisque"
-                        className="img-cover hover"
-                      />
-
-                      <button
-                        className="card-action-btn"
-                        aria-label="add to card"
-                        title="Add To Card"
-                      >
-                        <ion-icon
-                          name="bag-add-outline"
-                          aria-hidden="true"
-                        ></ion-icon>
-                      </button>
-                    </div>
-
-                    <div className="card-content">
-                      <div className="wrapper">
-                        <div className="rating-wrapper gray">
-                          <ion-icon name="star" aria-hidden="true"></ion-icon>
-                          <ion-icon name="star" aria-hidden="true"></ion-icon>
-                          <ion-icon name="star" aria-hidden="true"></ion-icon>
-                          <ion-icon name="star" aria-hidden="true"></ion-icon>
-                          <ion-icon name="star" aria-hidden="true"></ion-icon>
-                        </div>
-
-                        <span className="span">(0)</span>
-                      </div>
-
-                      <h3 className="h3">
-                        <a href="#" className="card-title">
-                          Morbi vel arcu scelerisque
-                        </a>
-                      </h3>
-
-                      <data className="card-price" value="49">
-                        $49.00
-                      </data>
-                    </div>
-                  </div>
-                </li>
-
-                <li>
-                  <div className="product-card">
-                    <div
-                      className="card-banner img-holder"
-                      style={{ width: "360px", height: "360px" }}
-                    >
-                      <img
-                        src="/images/product-5.jpg"
-                        width="360"
-                        height="360"
-                        loading="lazy"
-                        alt="Morbi vel arcu scelerisque"
-                        className="img-cover default"
-                      />
-                      <img
-                        src="/images/product-5_0.jpg"
-                        width="360"
-                        height="360"
-                        loading="lazy"
-                        alt="Morbi vel arcu scelerisque"
-                        className="img-cover hover"
-                      />
-
-                      <button
-                        className="card-action-btn"
-                        aria-label="add to card"
-                        title="Add To Card"
-                      >
-                        <ion-icon
-                          name="bag-add-outline"
-                          aria-hidden="true"
-                        ></ion-icon>
-                      </button>
-                    </div>
-
-                    <div className="card-content">
-                      <div className="wrapper">
-                        <div className="rating-wrapper gray">
-                          <ion-icon name="star" aria-hidden="true"></ion-icon>
-                          <ion-icon name="star" aria-hidden="true"></ion-icon>
-                          <ion-icon name="star" aria-hidden="true"></ion-icon>
-                          <ion-icon name="star" aria-hidden="true"></ion-icon>
-                          <ion-icon name="star" aria-hidden="true"></ion-icon>
-                        </div>
-
-                        <span className="span">(0)</span>
-                      </div>
-
-                      <h3 className="h3">
-                        <a href="#" className="card-title">
-                          Morbi vel arcu scelerisque
-                        </a>
-                      </h3>
-
-                      <data className="card-price" value="85">
-                        $85.00
-                      </data>
-                    </div>
-                  </div>
-                </li>
-
-                <li>
-                  <div className="product-card">
-                    <div
-                      className="card-banner img-holder"
-                      style={{ width: "360px", height: "360px" }}
-                    >
-                      <img
-                        src="/images/product-6.jpg"
-                        width="360"
-                        height="360"
-                        loading="lazy"
-                        alt="Nam justo libero porta ege"
-                        className="img-cover default"
-                      />
-                      <img
-                        src="/images/product-6_0.jpg"
-                        width="360"
-                        height="360"
-                        loading="lazy"
-                        alt="Nam justo libero porta ege"
-                        className="img-cover hover"
-                      />
-
-                      <button
-                        className="card-action-btn"
-                        aria-label="add to card"
-                        title="Add To Card"
-                      >
-                        <ion-icon
-                          name="bag-add-outline"
-                          aria-hidden="true"
-                        ></ion-icon>
-                      </button>
-                    </div>
-
-                    <div className="card-content">
-                      <div className="wrapper">
-                        <div className="rating-wrapper gray">
-                          <ion-icon name="star" aria-hidden="true"></ion-icon>
-                          <ion-icon name="star" aria-hidden="true"></ion-icon>
-                          <ion-icon name="star" aria-hidden="true"></ion-icon>
-                          <ion-icon name="star" aria-hidden="true"></ion-icon>
-                          <ion-icon name="star" aria-hidden="true"></ion-icon>
-                        </div>
-
-                        <span className="span">(0)</span>
-                      </div>
-
-                      <h3 className="h3">
-                        <a href="#" className="card-title">
-                          Nam justo libero porta ege
-                        </a>
-                      </h3>
-
-                      <data className="card-price" value="85">
-                        $85.00
-                      </data>
-                    </div>
-                  </div>
-                </li>
-
-                <li>
-                  <div className="product-card">
-                    <div
-                      className="card-banner img-holder"
-                      style={{ width: "360px", height: "360px" }}
-                    >
-                      <img
-                        src="/images/product-7.jpg"
-                        width="360"
-                        height="360"
-                        loading="lazy"
-                        alt="Nam justo libero porta ege"
-                        className="img-cover default"
-                      />
-                      <img
-                        src="/images/product-7_0.jpg"
-                        width="360"
-                        height="360"
-                        loading="lazy"
-                        alt="Nam justo libero porta ege"
-                        className="img-cover hover"
-                      />
-
-                      <button
-                        className="card-action-btn"
-                        aria-label="add to card"
-                        title="Add To Card"
-                      >
-                        <ion-icon
-                          name="bag-add-outline"
-                          aria-hidden="true"
-                        ></ion-icon>
-                      </button>
-                    </div>
-
-                    <div className="card-content">
-                      <div className="wrapper">
-                        <div className="rating-wrapper gray">
-                          <ion-icon name="star" aria-hidden="true"></ion-icon>
-                          <ion-icon name="star" aria-hidden="true"></ion-icon>
-                          <ion-icon name="star" aria-hidden="true"></ion-icon>
-                          <ion-icon name="star" aria-hidden="true"></ion-icon>
-                          <ion-icon name="star" aria-hidden="true"></ion-icon>
-                        </div>
-
-                        <span className="span">(0)</span>
-                      </div>
-
-                      <h3 className="h3">
-                        <a href="#" className="card-title">
-                          Nam justo libero porta ege
-                        </a>
-                      </h3>
-
-                      <data className="card-price" value="85">
-                        $85.00
-                      </data>
-                    </div>
-                  </div>
-                </li>
-
-                <li>
-                  <div className="product-card">
-                    <div
-                      className="card-banner img-holder"
-                      style={{ width: "360px", height: "360px" }}
-                    >
-                      <img
-                        src="/images/product-8.jpg"
-                        width="360"
-                        height="360"
-                        loading="lazy"
-                        alt="Etiam commodo leo sed"
-                        className="img-cover default"
-                      />
-                      <img
-                        src="/images/product-8_0.jpg"
-                        width="360"
-                        height="360"
-                        loading="lazy"
-                        alt="Etiam commodo leo sed"
-                        className="img-cover hover"
-                      />
-
-                      <button
-                        className="card-action-btn"
-                        aria-label="add to card"
-                        title="Add To Card"
-                      >
-                        <ion-icon
-                          name="bag-add-outline"
-                          aria-hidden="true"
-                        ></ion-icon>
-                      </button>
-                    </div>
-
-                    <div className="card-content">
-                      <div className="wrapper">
-                        <div className="rating-wrapper gray">
-                          <ion-icon name="star" aria-hidden="true"></ion-icon>
-                          <ion-icon name="star" aria-hidden="true"></ion-icon>
-                          <ion-icon name="star" aria-hidden="true"></ion-icon>
-                          <ion-icon name="star" aria-hidden="true"></ion-icon>
-                          <ion-icon name="star" aria-hidden="true"></ion-icon>
-                        </div>
-
-                        <span className="span">(0)</span>
-                      </div>
-
-                      <h3 className="h3">
-                        <a href="#" className="card-title">
-                          Etiam commodo leo sed
-                        </a>
-                      </h3>
-
-                      <data className="card-price" value="55">
-                        $55.00
-                      </data>
-                    </div>
-                  </div>
-                </li>
-              </ul>
-            </div>
-          </section>
-
-          <section className="section service" aria-label="service">
-            <div className="container">
-              <img
-                src="/images/service-image.png"
-                width="122"
-                height="136"
-                loading="lazy"
-                alt=""
-                className="img"
-              />
-
-              <h2 className="h2 section-title">
-                <span className="span">What your pet needs,</span> when they
-                need it.
-              </h2>
-
-              <ul className="grid-list">
-                <li>
-                  <div className="service-card">
-                    <figure className="card-icon">
-                      <img
-                        src="/images/service-icon-1.png"
-                        width="70"
-                        height="70"
-                        loading="lazy"
-                        alt="service icon"
-                      />
-                    </figure>
-
-                    <h3 className="h3 card-title">Free Same-Day Delivery</h3>
-
-                    <p className="card-text">
-                      Order by 2pm local time to get free delivery on orders
-                      $35+ today.
-                    </p>
-                  </div>
-                </li>
-
-                <li>
-                  <div className="service-card">
-                    <figure className="card-icon">
-                      <img
-                        src="/images/service-icon-2.png"
-                        width="70"
-                        height="70"
-                        loading="lazy"
-                        alt="service icon"
-                      />
-                    </figure>
-
-                    <h3 className="h3 card-title">30 Day Return</h3>
-
-                    <p className="card-text">
-                      35% off your first order plus 5% off all future orders.
-                    </p>
-                  </div>
-                </li>
-
-                <li>
-                  <div className="service-card">
-                    <figure className="card-icon">
-                      <img
-                        src="/images/service-icon-3.png"
-                        width="70"
-                        height="70"
-                        loading="lazy"
-                        alt="service icon"
-                      />
-                    </figure>
-
-                    <h3 className="h3 card-title">Security payment</h3>
-
-                    <p className="card-text">
-                      25% off your online order of $50+. Available at most
-                      locations.
-                    </p>
-                  </div>
-                </li>
-
-                <li>
-                  <div className="service-card">
-                    <figure className="card-icon">
-                      <img
-                        src="/images/service-icon-4.png"
-                        width="70"
-                        height="70"
-                        loading="lazy"
-                        alt="service icon"
-                      />
-                    </figure>
-
-                    <h3 className="h3 card-title">24/7 Support</h3>
-
-                    <p className="card-text">
-                      Shop online to get orders over $35 shipped fast and free.
-                    </p>
-                  </div>
-                </li>
-              </ul>
-            </div>
-          </section>
-
-          <section
-            className="cta has-bg-image"
-            aria-label="cta"
-            style="background-image: url('/images/cta-bg.jpg')"
-          >
-            <div className="container">
-              <figure className="cta-banner">
-                <img
-                  src="/images/cta-banner.png"
-                  width="900"
-                  height="660"
-                  loading="lazy"
-                  alt="cat"
-                  className="w-100"
-                />
-              </figure>
-
-              <div className="cta-content">
-                <img
-                  src="/images/cta-icon.png"
-                  width="120"
-                  height="35"
-                  loading="lazy"
-                  alt="taste guarantee"
-                  className="img"
-                />
-
-                <h2 className="h2 section-title">
-                  Taste it, love it or we’ll replace it… Guaranteed!
-                </h2>
-
-                <p className="section-text">
-                  At Petio, we believe your dog and cat will love their food so
-                  much that if they don’t … we’ll help you find a replacement.
-                  That’s our taste guarantee.
-                </p>
-
-                <a href="#" className="btn">
-                  Find out more
+            <button
+              className="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarCollapse"
+            >
+              <span className="navbar-toggler-icon" />
+            </button>
+            <div className="collapse navbar-collapse" id="navbarCollapse">
+              <div className="navbar-nav ms-auto py-0">
+                <a href="#" className="nav-item nav-link">
+                  Home
+                </a>
+                <a href="#about" className="nav-item nav-link">
+                  About Us
+                </a>
+                <a href="#services" className="nav-item nav-link">
+                  Our Services
+                </a>
+                <a href="#team" className="nav-item nav-link">
+                  Meet The Team
+                </a>
+                <a href="#blog" className="nav-item nav-link">
+                  Latest Blog
+                </a>
+                <a href="/pasRegis" className="nav-item nav-link">
+                  Register
+                </a>
+                <a href="/paslogin" className="nav-item nav-link">
+                  Login
                 </a>
               </div>
             </div>
-          </section>
+          </nav>
+        </div>
+      </div>
+      {/*Navbar End*/}
 
-          <section className="section brand" aria-label="brand">
-            <div className="container">
-              <h2 className="h2 section-title">
-                <span className="span">Popular</span> Brands
-              </h2>
+      {/* Header End */}
 
-              <ul className="has-scrollbar">
-                <li className="scrollbar-item">
-                  <div
-                    className="brand-card img-holder"
-                    style={{ width: 150, height: 150 }}
-                  >
-                    <img
-                      src="/images/brand-1.jpg"
-                      width="150"
-                      height="150"
-                      loading="lazy"
-                      alt="brand logo"
-                      className="img-cover"
-                    />
-                  </div>
-                </li>
-
-                <li className="scrollbar-item">
-                  <div
-                    className="brand-card img-holder"
-                    style={{ width: 150, height: 150 }}
-                  >
-                    <img
-                      src="/images/brand-2.jpg"
-                      width="150"
-                      height="150"
-                      loading="lazy"
-                      alt="brand logo"
-                      className="img-cover"
-                    />
-                  </div>
-                </li>
-
-                <li className="scrollbar-item">
-                  <div
-                    className="brand-card img-holder"
-                    style={{ width: 150, height: 150 }}
-                  >
-                    <img
-                      src="/images/brand-3.jpg"
-                      width="150"
-                      height="150"
-                      loading="lazy"
-                      alt="brand logo"
-                      className="img-cover"
-                    />
-                  </div>
-                </li>
-
-                <li className="scrollbar-item">
-                  <div
-                    className="brand-card img-holder"
-                    style={{ width: 150, height: 150 }}
-                  >
-                    <img
-                      src="/images/brand-4.jpg"
-                      width="150"
-                      height="150"
-                      loading="lazy"
-                      alt="brand logo"
-                      className="img-cover"
-                    />
-                  </div>
-                </li>
-
-                <li className="scrollbar-item">
-                  <div
-                    className="brand-card img-holder"
-                    style={{ width: "150px", height: "150px" }}
-                  >
-                    <img
-                      src="/images/brand-5.jpg"
-                      width="150"
-                      height="150"
-                      loading="lazy"
-                      alt="brand logo"
-                      className="img-cover"
-                    />
-                  </div>
-                </li>
-              </ul>
-            </div>
-          </section>
-        </article>
-      </main>
-
-      <footer
-        className="footer"
+      {/* Hero Start */}
+      <div
+        className="container-fluid bg-primary py-5"
         style={{
-          backgroundImage: "url('/images/footer-bg.jpg')",
+          background:
+            "url(/public/hero-bg.jpg) no-repeat center center / cover",
         }}
       >
-        <div className="footer-top section">
-          <div className="container">
-            <div className="footer-brand">
-              <a href="#" className="logo">
-                Kitter
-              </a>
-
-              <p className="footer-text">
-                If you have any question, please contact us at{" "}
-                <a href="mailto:support@gmail.com" className="link">
-                  support@gmail.com
-                </a>
+        <div className="container">
+          <div className="row align-items-center">
+            <div className="col-lg-7">
+              <h1 className="display-4 text-white mb-3">
+                The well-being of your animal, Our Priority
+              </h1>
+              <p className="lead text-white mb-4">
+                We are committed to providing high-quality, compassionate care
+                to improve the health of your beloved pet .
               </p>
 
-              <ul className="contact-list">
-                <li className="contact-item">
-                  <ion-icon
-                    name="location-outline"
-                    aria-hidden="true"
-                  ></ion-icon>
+              <a href="#services" className="btn btn-outline-light">
+                Learn More
+              </a>
+            </div>
+            <div className="col-lg-5 text-center">
+              <img
+                className="img-fluid"
+                src="https://assets.isu.pub/document-structure/221122033049-9a33db40979c7056c58a9bc24a86efc8/v1/18edf8864ad8932026fd1ac98750a911.jpeg"
+                alt="Hero Image"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* Hero End */}
 
-                  <address className="address">
-                    30 Buttonwood St.Pataskala OH 43062
-                  </address>
-                </li>
+      {/* About Start */}
+      <div id="about" className="container-fluid py-5">
+        <div className="container">
+          <div className="row align-items-center">
+            <div className="col-lg-6">
+              <img
+                className="img-fluid rounded-3"
+                src="https://www.imagella.com/cdn/shop/products/ae180f729a176c3073cd4125e6998a0d.jpg?v=1692501409"
+                alt="About Us"
+              />
+            </div>
+            <div className="col-lg-6 mt-4 mt-lg-0">
+              <h2 className="display-4 mb-4">About Us</h2>
+              <p className="lead">
+                Ce site web a été créé avec la vision de faciliter le contact
+                harmonieux entre les clients et les vétérinaires, garantissant
+                ainsi que vos animaux de compagnie bénéficient des meilleurs
+                traitements possibles. Nous sommes déterminés à connecter les
+                propriétaires d'animaux avec certains des meilleurs vétérinaires
+                du pays, partageant ainsi notre passion commune pour la santé et
+                le bien-être des compagnons à quatre pattes.
+              </p>
+              <p>
+                Notre mission va au-delà de la simple prestation de services
+                vétérinaires. Nous nous engageons à offrir une plateforme
+                conviviale où vous pouvez trouver un vétérinaire dévoué qui
+                comprend véritablement les besoins uniques de votre animal. Que
+                ce soit pour des soins de routine, des conseils nutritionnels ou
+                des situations d'urgence, notre équipe de professionnels
+                compétents est là pour fournir des solutions adaptées à chaque
+                situation.
+              </p>
+              <a href="#" className="btn btn-primary">
+                Learn More
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* About End */}
+      {/* Counter Start */}
+      <div className="container-fluid bg-primary py-5">
+        <div className="container">
+          <div className="row text-white text-center">
+            <div className="col-lg-3 col-md-6 mb-4 mb-lg-0">
+              <div className="counter">
+                <i className="bi bi-heart" />
+                <h2
+                  className="timer count-title count-number"
+                  data-to={1500}
+                  data-speed={1500}
+                />
+                <p className="count-text ">Happy Patients</p>
+              </div>
+            </div>
+            <div className="col-lg-3 col-md-6 mb-4 mb-lg-0">
+              <div className="counter">
+                <i className="bi bi-check" />
+                <h2
+                  className="timer count-title count-number"
+                  data-to={2000}
+                  data-speed={2000}
+                />
+                <p className="count-text ">Successful Surgeries</p>
+              </div>
+            </div>
+            <div className="col-lg-3 col-md-6">
+              <div className="counter">
+                <i className="bi bi-person" />
+                <h2
+                  className="timer count-title count-number"
+                  data-to={30}
+                  data-speed={1500}
+                />
+                <p className="count-text ">Qualified Doctors</p>
+              </div>
+            </div>
+            <div className="col-lg-3 col-md-6">
+              <div className="counter">
+                <i className="bi bi-briefcase" />
+                <h2
+                  className="timer count-title count-number"
+                  data-to={20}
+                  data-speed={1500}
+                />
+                <p className="count-text ">Years of Experience</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* Counter End */}
+      {/* Services Start */}
+      <div id="services" className="container-fluid py-5">
+        <div className="container">
+          <div
+            className="text-center mx-auto mb-5"
+            style={{ maxWidth: "500px" }}
+          >
+            <h5 className="d-inline-block text-primary text-uppercase border-bottom border-5">
+              Services
+            </h5>
+            <h1 className="display-4">
+              We offer a wide range of services to your pet
+            </h1>
+          </div>
 
-                <li className="contact-item">
-                  <ion-icon name="call-outline" aria-hidden="true"></ion-icon>
+          <div className="row g-5">
+            {/* First row */}
+            <div className="col-lg-6 col-md-12">
+              <div
+                className="service-item bg-light rounded d-flex flex-column align-items-center justify-content-center text-center"
+                style={{ height: "300px" }}
+              >
+                <div className="service-icon mb-3">
+                  <img
+                    src="https://cdn.iconscout.com/icon/premium/png-256-thumb/veterinary-5992774-5047565.png?f=webp&w=128"
+                    alt="Service Icon"
+                    style={{ width: "80px", height: "80px" }}
+                  />
+                </div>
+                <h4 className="mb-3" style={{ fontSize: "1.5rem" }}>
+                  Consultation à domicile
+                </h4>
 
-                  <a href="tel:+16234567891011" className="contact-link">
-                    (+1)-6234-56-789-1011
-                  </a>
-                </li>
-              </ul>
-
-              <ul className="social-list">
-                <li>
-                  <a href="#" className="social-link">
-                    <ion-icon name="logo-facebook"></ion-icon>
-                  </a>
-                </li>
-
-                <li>
-                  <a href="#" className="social-link">
-                    <ion-icon name="logo-twitter"></ion-icon>
-                  </a>
-                </li>
-
-                <li>
-                  <a href="#" className="social-link">
-                    <ion-icon name="logo-pinterest"></ion-icon>
-                  </a>
-                </li>
-
-                <li>
-                  <a href="#" className="social-link">
-                    <ion-icon name="logo-instagram"></ion-icon>
-                  </a>
-                </li>
-              </ul>
+                <a className="btn btn-lg btn-primary rounded-pill" href="">
+                  <i className="bi bi-arrow-right"></i>
+                </a>
+              </div>
             </div>
 
-            <ul className="footer-list">
-              <li>
-                <p className="footer-list-title">Corporate</p>
-              </li>
+            <div className="col-lg-6 col-md-12">
+              <div
+                className="service-item bg-light rounded d-flex flex-column align-items-center justify-content-center text-center"
+                style={{ height: "300px" }}
+              >
+                <div className="service-icon mb-3">
+                  <img
+                    src="https://cdn.iconscout.com/icon/premium/png-256-thumb/pet-grooming-4045681-3341852.png"
+                    alt="Service Icon"
+                    style={{ width: "80px", height: "80px" }}
+                  />
+                </div>
+                <h4 className="mb-3" style={{ fontSize: "1.5rem" }}>
+                  Toilettage à domicile
+                </h4>
 
-              <li>
-                <a href="#" className="footer-link">
-                  Careers
+                <a className="btn btn-lg btn-primary rounded-pill" href="">
+                  <i className="bi bi-arrow-right"></i>
                 </a>
-              </li>
+              </div>
+            </div>
 
-              <li>
-                <a href="#" className="footer-link">
+            {/* Second row */}
+            <div className="col-lg-6 col-md-12">
+              <div
+                className="service-item bg-light rounded d-flex flex-column align-items-center justify-content-center text-center"
+                style={{ height: "300px" }}
+              >
+                <div className="service-icon mb-3">
+                  <img
+                    src="https://static.thenounproject.com/png/4553416-200.png"
+                    alt="Service Icon"
+                    style={{ width: "80px", height: "80px" }}
+                  />
+                </div>
+                <h4 className="mb-3" style={{ fontSize: "1.5rem" }}>
+                  Consultation chez le Véterinaire
+                </h4>
+
+                <a className="btn btn-lg btn-primary rounded-pill" href="">
+                  <i className="bi bi-arrow-right"></i>
+                </a>
+              </div>
+            </div>
+
+            <div className="col-lg-6 col-md-12">
+              <div
+                className="service-item bg-light rounded d-flex flex-column align-items-center justify-content-center text-center"
+                style={{ height: "300px" }}
+              >
+                <div className="service-icon mb-3">
+                  <img
+                    src="https://static.thenounproject.com/png/4553412-200.png"
+                    alt="Service Icon"
+                    style={{ width: "80px", height: "80px" }}
+                  />
+                </div>
+                <h4 className="mb-3" style={{ fontSize: "1.5rem" }}>
+                  Toilettage chez le Véterinaire
+                </h4>
+
+                <a className="btn btn-lg btn-primary rounded-pill" href="">
+                  <i className="bi bi-arrow-right"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* Services End */}
+
+      {/* Team Start */}
+      <div id="team" className="container-fluid py-5">
+        <div className="container">
+          <div className="text-center mx-auto mb-5" style={{ maxWidth: 500 }}>
+            <h5 className="d-inline-block text-primary text-uppercase border-bottom border-5">
+              Our Veterinarians
+            </h5>
+            <h1 className="display-4">Qualified Animalcare Professionals</h1>
+          </div>
+          <div className="owl-carousel team-carousel position-relative">
+            {Array.isArray(veto) &&
+              veto.map((e) => (
+                <div className="team-item" key={e.id}>
+                  <div className="row g-0 bg-light rounded overflow-hidden">
+                    <div className="col-12 col-sm-5 h-100">
+                      <img
+                        className="img-fluid h-100"
+                        src={e.photo}
+                        style={{ objectFit: "cover" }}
+                      />
+                    </div>
+                    <div className="col-12 col-sm-7 h-100 d-flex flex-column">
+                      <div className="mt-auto p-4">
+                        <h3>
+                          {e.name} {e.lastName}
+                        </h3>
+                        <h6 className="fw-normal fst-italic text-primary mb-4">
+                          {e.age} ans
+                        </h6>
+                        <p className="m-0">Numéro d'ordre : {e.numordre}</p>
+                      </div>
+                      <div className="d-flex mt-auto border-top p-4">
+                        <a
+                          className="btn btn-lg btn-primary btn-lg-square rounded-circle me-3"
+                          href="#"
+                        >
+                          <i className="fab fa-twitter" />
+                        </a>
+                        <a
+                          className="btn btn-lg btn-primary btn-lg-square rounded-circle me-3"
+                          href="#"
+                        >
+                          <i className="fab fa-facebook-f" />
+                        </a>
+                        <a
+                          className="btn btn-lg btn-primary btn-lg-square rounded-circle"
+                          href="#"
+                        >
+                          <i className="fab fa-linkedin-in" />
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+          </div>
+        </div>
+      </div>
+      {/* Team End */}
+      {/* Blog Start */}
+      <div id="blog" className="container-fluid bg-light py-5">
+        <div className="container">
+          <div className="row">
+            <div className="col-lg-8 mx-auto text-center">
+              <h2 className="display-4 mb-4">Latest Blog Posts</h2>
+              <p className="lead">
+                Stay updated with the latest tips and news from our experts.
+              </p>
+            </div>
+          </div>
+          <div className="row mt-5">
+            <div className="col-lg-4 mb-4">
+              <div className="card">
+                <img
+                  src="https://www.mouss-le-chien.com/medias/images/bouledogue-francais-veterinaire-anti-puce-pipette-adobestock-90767873.jpeg"
+                  className="card-img-top"
+                  alt="Blog 1"
+                />
+                <div className="card-body">
+                  <h5 className="card-title">
+                    Traitement anti puce pour chien : tout ce que vous devez
+                    savoir
+                  </h5>
+                  <p className="card-text">
+                    Cet article fait partie d’un ensemble de fiches conseils
+                    dédiées à la santé de votre chien. Vous pourrez retrouver la
+                    plupart des produits de traitement anti puces dont il est...
+                  </p>
+                  <a
+                    href="https://www.universpara.com/blog/traitement-anti-puce-chien/"
+                    className="btn btn-primary"
+                  >
+                    Read More
+                  </a>
+                </div>
+                <div className="card-footer">
+                  <small>Blog Universpara.com</small>
+                </div>
+              </div>
+            </div>
+            <div className="col-lg-4 mb-4">
+              <div className="card">
+                <img
+                  src="https://images.unsplash.com/photo-1576201836106-db1758fd1c97?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8MTN8fHxlbnwwfHx8fHw%3D"
+                  className="card-img-top"
+                  alt="Blog 2"
+                />
+                <div className="card-body">
+                  <h5 className="card-title">
+                    Les préférences alimentaires des propriétaires de chiens
+                  </h5>
+                  <p className="card-text">
+                    L'enquête révèle également que la majorité des chiens
+                    reçoivent deux repas par jour. Cependant, seulement 22 % des
+                    propriétaires suivent les conseils de leur vétérinaire...
+                  </p>
+                  <a
+                    href="https://www.lacompagniedesanimaux.com/conseil-veterinaire/les-prefrences-alimentaires-des-proprietaires-de-chiens-en-france.html"
+                    className="btn btn-primary"
+                  >
+                    Read More
+                  </a>
+                </div>
+                <div className="card-footer">
+                  <small>La Compagnie des Animaux</small>
+                </div>
+              </div>
+            </div>
+            <div className="col-lg-4 mb-4">
+              <div className="card">
+                <img
+                  src="https://images.designtrends.com/wp-content/uploads/2016/03/28102309/FEATURE106.jpg"
+                  className="card-img-top"
+                  alt="Blog 3"
+                />
+                <div className="card-body">
+                  <h5 className="card-title">
+                    500 idées de noms de chats commençant par S
+                  </h5>
+                  <p className="card-text">
+                    Si vous prévoyez d’adopter un chat en 2021 et que vous êtes
+                    à la recherche d’un nom original, découvrez notre sélection
+                    de noms commençant par S: Prénoms pour chats mâles...
+                  </p>
+                  <a
+                    href="https://www.goodbro.fr/conseils-veterinaires/idees-noms-chats-s-2021/"
+                    className="btn btn-primary"
+                  >
+                    Read More
+                  </a>
+                </div>
+                <div className="card-footer">
+                  <small>
+                    Animalerie en ligne pour chats et chiens d'alimentation, de
+                    parapharmacie et d'accessoires et conseils vétérinaires
+                  </small>
+                  <div className="d-flex align-items-center"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* Blog End */}
+      {/* Footer Start */}
+      <div className="container-fluid bg-dark text-light mt-5 py-5">
+        <div className="container py-5">
+          <div className="row g-5">
+            <div className="col-lg-3 col-md-6">
+              <h4 className="d-inline-block text-primary text-uppercase border-bottom border-5 border-secondary mb-4">
+                Get In Touch
+              </h4>
+              <p className="mb-4">
+                You can contact us via email or call us on the +216 98765432
+              </p>
+              <p className="mb-2">
+                <i className="fa fa-map-marker-alt text-primary me-3" />
+                Tunis, Tunisia
+              </p>
+              <p className="mb-2">
+                <i className="fa fa-envelope text-primary me-3" />
+                vetopro@gmail.com
+              </p>
+              <p className="mb-0">
+                <i className="fa fa-phone-alt text-primary me-3" />
+                +216 98765432
+              </p>
+            </div>
+            <div className="col-lg-3 col-md-6">
+              <h4 className="d-inline-block text-primary text-uppercase border-bottom border-5 border-secondary mb-4">
+                Quick Links
+              </h4>
+              <div className="d-flex flex-column justify-content-start">
+                <a className="text-light mb-2" href="#">
+                  <i className="fa fa-angle-right me-2" />
+                  Home
+                </a>
+                <a className="text-light mb-2" href="#">
+                  <i className="fa fa-angle-right me-2" />
                   About Us
                 </a>
-              </li>
-
-              <li>
-                <a href="#" className="footer-link">
+                <a className="text-light mb-2" href="#">
+                  <i className="fa fa-angle-right me-2" />
+                  Our Services
+                </a>
+                <a className="text-light mb-2" href="#">
+                  <i className="fa fa-angle-right me-2" />
+                  Meet The Team
+                </a>
+                <a className="text-light mb-2" href="#">
+                  <i className="fa fa-angle-right me-2" />
+                  Latest Blog
+                </a>
+                <a className="text-light" href="#">
+                  <i className="fa fa-angle-right me-2" />
                   Contact Us
                 </a>
-              </li>
-
-              <li>
-                <a href="#" className="footer-link">
-                  FAQs
+              </div>
+            </div>
+            <div className="col-lg-3 col-md-6">
+              <h4 className="d-inline-block text-primary text-uppercase border-bottom border-5 border-secondary mb-4">
+                Popular Links
+              </h4>
+              <div className="d-flex flex-column justify-content-start">
+                <a className="text-light mb-2" href="#">
+                  <i className="fa fa-angle-right me-2" />
+                  Home
                 </a>
-              </li>
-
-              <li>
-                <a href="#" className="footer-link">
-                  Vendors
+                <a className="text-light mb-2" href="#">
+                  <i className="fa fa-angle-right me-2" />
+                  About Us
                 </a>
-              </li>
-
-              <li>
-                <a href="#" className="footer-link">
-                  Affiliate Program
+                <a className="text-light mb-2" href="#">
+                  <i className="fa fa-angle-right me-2" />
+                  Our Services
                 </a>
-              </li>
-            </ul>
-
-            <ul className="footer-list">
-              <li>
-                <p className="footer-list-title">Information</p>
-              </li>
-
-              <li>
-                <a href="#" className="footer-link">
-                  Online Store
+                <a className="text-light mb-2" href="#">
+                  <i className="fa fa-angle-right me-2" />
+                  Meet The Team
                 </a>
-              </li>
-
-              <li>
-                <a href="#" className="footer-link">
-                  Privacy Policy
+                <a className="text-light mb-2" href="#">
+                  <i className="fa fa-angle-right me-2" />
+                  Latest Blog
                 </a>
-              </li>
-
-              <li>
-                <a href="#" className="footer-link">
-                  Refund Policy
+                <a className="text-light" href="#">
+                  <i className="fa fa-angle-right me-2" />
+                  Contact Us
                 </a>
-              </li>
-
-              <li>
-                <a href="#" className="footer-link">
-                  Shipping Policy
+              </div>
+            </div>
+            <div className="col-lg-3 col-md-6">
+              <h4 className="d-inline-block text-primary text-uppercase border-bottom border-5 border-secondary mb-4">
+                Newsletter
+              </h4>
+              <form action="">
+                <div className="input-group">
+                  <button
+                    className="btn btn-primary"
+                    onClick={() => navigate("/pasRegis")}
+                  >
+                    Register
+                  </button>
+                </div>
+              </form>
+              <h6 className="text-primary text-uppercase mt-4 mb-3">
+                Follow Us
+              </h6>
+              <div className="d-flex">
+                <a
+                  className="btn btn-lg btn-primary btn-lg-square rounded-circle me-2"
+                  href="#"
+                >
+                  <i className="fab fa-twitter" />
                 </a>
-              </li>
-
-              <li>
-                <a href="#" className="footer-link">
-                  Terms of Service
+                <a
+                  className="btn btn-lg btn-primary btn-lg-square rounded-circle me-2"
+                  href="#"
+                >
+                  <i className="fab fa-facebook-f" />
                 </a>
-              </li>
-
-              <li>
-                <a href="#" className="footer-link">
-                  Track Order
+                <a
+                  className="btn btn-lg btn-primary btn-lg-square rounded-circle me-2"
+                  href="#"
+                >
+                  <i className="fab fa-linkedin-in" />
                 </a>
-              </li>
-            </ul>
-
-            <ul className="footer-list">
-              <li>
-                <p className="footer-list-title">Services</p>
-              </li>
-
-              <li>
-                <a href="#" className="footer-link">
-                  Grooming
+                <a
+                  className="btn btn-lg btn-primary btn-lg-square rounded-circle"
+                  href="#"
+                >
+                  <i className="fab fa-instagram" />
                 </a>
-              </li>
-
-              <li>
-                <a href="#" className="footer-link">
-                  Positive Dog Training
-                </a>
-              </li>
-
-              <li>
-                <a href="#" className="footer-link">
-                  Veterinary Services
-                </a>
-              </li>
-
-              <li>
-                <a href="#" className="footer-link">
-                  Petco Insurance
-                </a>
-              </li>
-
-              <li>
-                <a href="#" className="footer-link">
-                  Pet Adoption
-                </a>
-              </li>
-
-              <li>
-                <a href="#" className="footer-link">
-                  Resource Center
-                </a>
-              </li>
-            </ul>
+              </div>
+              <h6 className="text-primary text-uppercase mt-4 mb-3">
+                No social media at the moment (soon !)
+              </h6>
+            </div>
           </div>
         </div>
+      </div>
 
-        <div className="footer-bottom">
-          <div className="container">
-            <p className="copyright">
-              &copy; 2022 Made with ♥ by{" "}
-              <a href="#" className="copyright-link">
-                codewithsadee.
-              </a>
-            </p>
-
-            <img
-              src="/images/payment.png"
-              width="397"
-              height="32"
-              loading="lazy"
-              alt="payment method"
-              className="img"
-            />
+      <div className="container-fluid bg-dark text-light border-top border-secondary py-4">
+        <div className="container">
+          <div className="row g-5">
+            <div className="col-md-6 text-center text-md-start">
+              <p className="mb-md-0">
+                <a className="text-primary" href="#">
+                  Vetopro
+                </a>
+                . All Rights Reserved.
+              </p>
+            </div>
+            <div className="col-md-6 text-center text-md-end d-flex">
+              <p className="mb-0 ms-auto">Designed by : </p>
+              <p className="mb-0 text-primary"> Skander Khlif</p>
+            </div>
           </div>
         </div>
-      </footer>
+      </div>
+      {/* Footer End */}
 
-      <a
-        href="#top"
-        className="back-top-btn"
-        aria-label="back to top"
-        data-back-top-btn
-      >
-        <ion-icon name="chevron-up" aria-hidden="true"></ion-icon>
+      {/* Back to Top */}
+      <a href="#" className="btn btn-lg btn-primary btn-lg-square back-to-top">
+        <i className="bi bi-arrow-up" />
       </a>
+      {/* JavaScript Libraries */}
+      {/* Template Javascript */}
     </div>
   );
-}
+};
 
 export default Homepage;

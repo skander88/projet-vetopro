@@ -6,7 +6,7 @@ function PasLogin() {
   const navigate = useNavigate();
 
   return (
-    <div>
+    <div className="body77">
       <header>
         <center>
           <h1>Choisissez votre Role : </h1>

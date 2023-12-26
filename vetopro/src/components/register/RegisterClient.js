@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { postClient } from "../../api/clientApi";
 
 const RegisterClient = () => {
-  const [photo, setPhoto] = useState("");
   const [name, setName] = useState("");
   const [lastName, setLastName] = useState("");
   const [age, setAge] = useState("");
@@ -26,15 +25,8 @@ const RegisterClient = () => {
     setEmail("");
     setLastName("");
     setPassword("");
-    setPhoto(null);
     setAge("");
     setTel("");
-  };
-
-  const handlePhotoChange = (e) => {
-    // Handle file input changes
-    const file = e.target.files[0];
-    setPhoto(file);
   };
 
   return (
@@ -66,15 +58,14 @@ const RegisterClient = () => {
                   onChange={(e) => setName(e.target.value)}
                 />
               </div>
-              <div className="pets-photo">
-                <label htmlFor="pets-upload">Upload photo</label>
-                <br />
+              <div className="pets-birthday">
+                <label htmlFor="pets-breed">Adresse</label>
                 <input
-                  type="file"
-                  id="pets-upload"
-                  accept="image/*"
-                  onChange={handlePhotoChange}
-                  className="photcont"
+                  type="text"
+                  id="pets-breed"
+                  placeholder="Please enter your Adresse"
+                  value={adresse}
+                  onChange={(e) => setAdresse(e.target.value)}
                 />
               </div>
             </div>
@@ -89,14 +80,14 @@ const RegisterClient = () => {
                   onChange={(e) => setLastName(e.target.value)}
                 />
               </div>
-              <div className="pets-birthday">
-                <label htmlFor="pets-breed">Adresse</label>
+              <div className="pets-spayed-neutered">
+                <label htmlFor="pets-breed">E-mail</label>
                 <input
                   type="text"
                   id="pets-breed"
-                  placeholder="Please enter your Adresse"
-                  value={adresse}
-                  onChange={(e) => setAdresse(e.target.value)}
+                  placeholder="Please enter your email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
             </div>
@@ -112,13 +103,13 @@ const RegisterClient = () => {
                 />
               </div>
               <div className="pets-spayed-neutered">
-                <label htmlFor="pets-breed">E-mail</label>
+                <label htmlFor="pets-breed">Password</label>
                 <input
                   type="text"
                   id="pets-breed"
-                  placeholder="Please enter your email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Please enter your password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
             </div>
@@ -131,16 +122,6 @@ const RegisterClient = () => {
                   placeholder="Please enter your phone number"
                   value={tel}
                   onChange={(e) => setTel(e.target.value)}
-                />
-              </div>
-              <div className="pets-spayed-neutered">
-                <label htmlFor="pets-breed">Password</label>
-                <input
-                  type="text"
-                  id="pets-breed"
-                  placeholder="Please enter your password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
             </div>
@@ -158,7 +139,6 @@ const RegisterClient = () => {
                     lastName,
                     email,
                     password,
-                    photo,
                     tel,
                     age,
                     adresse,

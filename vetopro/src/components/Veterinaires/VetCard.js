@@ -15,7 +15,7 @@ const VetCard = ({ mini, getAll }) => {
     return mini.description === "" ? null : <p>{mini.description}</p>;
   };
   return (
-    <div>
+    <div className="body111">
       <section className="articles">
         <article>
           <div className="artbody">
