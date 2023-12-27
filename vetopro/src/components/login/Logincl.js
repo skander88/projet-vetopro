@@ -78,7 +78,7 @@ const Logincl = () => {
                 <button type="reset" onClick={handleReset}>
                   Reset
                 </button>
-                <a href="/registerVet">Register</a>
+                <a href="/registerClient">Register</a>
                 <button
                   id="next"
                   onClick={() =>

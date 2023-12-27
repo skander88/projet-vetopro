@@ -16,6 +16,12 @@ export const fetchVet = async () => {
   );
   return data;
 };
+export const updateVet = async (id, values) => {
+  const updateVet = await axios.put(
+    `http://localhost:4000/vet/updatevet/${id}`,
+    values
+  );
+};
 export const fetchAllVet = async () => {
   const { data } = await axios.get(
     "http://localhost:4000/authvet/Veterinaires"

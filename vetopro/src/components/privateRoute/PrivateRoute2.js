@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
 import Logincl from "../login/Logincl";
@@ -10,6 +10,8 @@ import { setVet } from "../../store/vetSlice";
 import { fetchAllVet } from "../../api/vetApi";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
+import VetList from "../Veterinaires/VetList";
+import VetCard from "../Veterinaires/VetCard";
 
 const PrivateRoute2 = () => {
   const navigate = useNavigate();
@@ -50,70 +52,8 @@ const PrivateRoute2 = () => {
     localStorage.removeItem("token");
     navigate("/");
   };
-  const TeamCarousel = ({ veto }) => {
-    return (
-      <div id="team" className="container-fluid py-5">
-        <div className="container">
-          <div className="text-center mx-auto mb-5" style={{ maxWidth: 500 }}>
-            <h5 className="d-inline-block text-primary text-uppercase border-bottom border-5">
-              Our Veterinarians
-            </h5>
-            <h1 className="display-4">Qualified Animalcare Professionals</h1>
-          </div>
 
-          <Carousel showArrows={true} showStatus={false} showThumbs={false}>
-            {Array.isArray(veto) &&
-              veto.map((e) => (
-                <div key={e.id}>
-                  {/* Your existing code for each team member */}
-                  <div className="team-item row g-0 bg-light rounded overflow-hidden">
-                    <div className="col-12 col-sm-5 h-100">
-                      <img
-                        className="img-fluid h-100"
-                        src={e.photo}
-                        style={{ objectFit: "cover" }}
-                        alt={e.name}
-                      />
-                    </div>
-                    <div className="col-12 col-sm-7 h-100 d-flex flex-column">
-                      <div className="mt-auto p-4">
-                        <h3>
-                          {e.name} {e.lastName}
-                        </h3>
-                        <h6 className="fw-normal fst-italic text-primary mb-4">
-                          {e.age} ans
-                        </h6>
-                        <p className="m-0">Numéro d'ordre : {e.numordre}</p>
-                      </div>
-                      <div className="d-flex mt-auto border-top p-4">
-                        <a
-                          className="btn btn-lg btn-primary btn-lg-square rounded-circle me-3"
-                          href="#"
-                        >
-                          <i className="fab fa-twitter" />
-                        </a>
-                        <a
-                          className="btn btn-lg btn-primary btn-lg-square rounded-circle me-3"
-                          href="#"
-                        >
-                          <i className="fab fa-facebook-f" />
-                        </a>
-                        <a
-                          className="btn btn-lg btn-primary btn-lg-square rounded-circle"
-                          href="#"
-                        >
-                          <i className="fab fa-linkedin-in" />
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-          </Carousel>
-        </div>
-      </div>
-    );
-  };
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   return (
     <div>
@@ -125,9 +65,13 @@ const PrivateRoute2 = () => {
             <div className="container">
               <nav className="navbar navbar-expand-lg bg-white navbar-light py-2 py-lg-0">
                 <div className="d-flex align-items-center">
-                  <a href="#" className="navbar-brand">
+                  <a
+                    href="#"
+                    className="navbar-brand"
+                    style={{ pointerEvents: "none" }}
+                  >
                     <img
-                      src="/logo.png"
+                      src="logo.png"
                       alt="Vétopro Logo"
                       style={{ width: "120px" }}
                     />
@@ -397,7 +341,41 @@ const PrivateRoute2 = () => {
           {/* Counter End */}
 
           {/* Team Start */}
-          <TeamCarousel veto={veto} />
+          <div id="team" className="container-fluid py-5">
+            <div className="container">
+              <div
+                className="text-center mx-auto mb-5"
+                style={{ maxWidth: 500 }}
+              >
+                <h5 className="d-inline-block text-primary text-uppercase border-bottom border-5">
+                  Our Veterinarians
+                </h5>
+                <h1 className="display-4">
+                  Qualified Animalcare Professionals
+                </h1>
+              </div>
+              {Array.isArray(veto) && veto.length > 0 ? (
+                <Carousel
+                  showArrows={true}
+                  showStatus={false}
+                  showThumbs={false}
+                  selectedItem={currentIndex}
+                  emulateTouch={true}
+                  infiniteLoop={true}
+                  centerMode={true}
+                  centerSlidePercentage={33.33} // Set the percentage based on your design
+                >
+                  {veto.map((vet) => (
+                    <div key={vet.id}>
+                      <VetCard key={vet.id} mini={vet} />
+                    </div>
+                  ))}
+                </Carousel>
+              ) : (
+                <p>No veterinarians available</p>
+              )}
+            </div>
+          </div>
           {/* Team End */}
           {/* Blog Start */}
           <div id="blog" className="container-fluid bg-light py-5">

@@ -46,9 +46,13 @@ const PrivateRoute2 = () => {
             <div className="container">
               <nav className="navbar navbar-expand-lg bg-white navbar-light py-2 py-lg-0">
                 <div className="d-flex align-items-center">
-                  <a href="#" className="navbar-brand">
+                  <a
+                    href="#"
+                    className="navbar-brand"
+                    style={{ pointerEvents: "none" }}
+                  >
                     <img
-                      src="/logo.png"
+                      src="logo.png"
                       alt="Vétopro Logo"
                       style={{ width: "120px" }}
                     />

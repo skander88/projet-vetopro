@@ -11,6 +11,9 @@ import "owl.carousel/dist/assets/owl.theme.default.css";
 import "owl.carousel";*/
 import { setVet } from "../../store/vetSlice";
 import { fetchAllVet } from "../../api/vetApi";
+import VetCard from "../Veterinaires/VetCard";
+import { Carousel } from "react-responsive-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 const Homepage = () => {
   const navigate = useNavigate();
@@ -27,48 +30,8 @@ const Homepage = () => {
   useEffect(() => {
     getAll();
   }, []);
-  {
-    /*useEffect(() => {
-    // Dropdown on mouse hover
-    function toggleNavbarMethod() {
-      if (window.innerWidth > 992) {
-        $(".navbar .dropdown")
-          .on("mouseover", function () {
-            $(".dropdown-toggle", this).trigger("click");
-          })
-          .on("mouseout", function () {
-            $(".dropdown-toggle", this).trigger("click").blur();
-          });
-      } else {
-        $(".navbar .dropdown").off("mouseover").off("mouseout");
-      }
-    }
-    toggleNavbarMethod();
-    $(window).resize(toggleNavbarMethod);
 
-    // Team carousel
-    $(".team-carousel, .related-carousel").owlCarousel({
-      autoplay: true,
-      smartSpeed: 1000,
-      margin: 45,
-      dots: false,
-      loop: true,
-      nav: true,
-      navText: [
-        '<i class="bi bi-arrow-left"></i>',
-        '<i class="bi bi-arrow-right"></i>',
-      ],
-      responsive: {
-        0: {
-          items: 1,
-        },
-        992: {
-          items: 2,
-        },
-      },
-    });
-  }, []);*/
-  }
+  const [currentIndex, setCurrentIndex] = useState(0);
   return (
     <div className="body111">
       {/* Header Start */}
@@ -77,7 +40,11 @@ const Homepage = () => {
         <div className="container">
           <nav className="navbar navbar-expand-lg bg-white navbar-light py-2 py-lg-0">
             <div className="d-flex align-items-center">
-              <a href="#" className="navbar-brand">
+              <a
+                href="#"
+                className="navbar-brand"
+                style={{ pointerEvents: "none" }}
+              >
                 <img
                   src="logo.png"
                   alt="Vétopro Logo"
@@ -372,53 +339,26 @@ const Homepage = () => {
             </h5>
             <h1 className="display-4">Qualified Animalcare Professionals</h1>
           </div>
-          <div className="owl-carousel team-carousel position-relative">
-            {Array.isArray(veto) &&
-              veto.map((e) => (
-                <div className="team-item" key={e.id}>
-                  <div className="row g-0 bg-light rounded overflow-hidden">
-                    <div className="col-12 col-sm-5 h-100">
-                      <img
-                        className="img-fluid h-100"
-                        src={e.photo}
-                        style={{ objectFit: "cover" }}
-                      />
-                    </div>
-                    <div className="col-12 col-sm-7 h-100 d-flex flex-column">
-                      <div className="mt-auto p-4">
-                        <h3>
-                          {e.name} {e.lastName}
-                        </h3>
-                        <h6 className="fw-normal fst-italic text-primary mb-4">
-                          {e.age} ans
-                        </h6>
-                        <p className="m-0">Numéro d'ordre : {e.numordre}</p>
-                      </div>
-                      <div className="d-flex mt-auto border-top p-4">
-                        <a
-                          className="btn btn-lg btn-primary btn-lg-square rounded-circle me-3"
-                          href="#"
-                        >
-                          <i className="fab fa-twitter" />
-                        </a>
-                        <a
-                          className="btn btn-lg btn-primary btn-lg-square rounded-circle me-3"
-                          href="#"
-                        >
-                          <i className="fab fa-facebook-f" />
-                        </a>
-                        <a
-                          className="btn btn-lg btn-primary btn-lg-square rounded-circle"
-                          href="#"
-                        >
-                          <i className="fab fa-linkedin-in" />
-                        </a>
-                      </div>
-                    </div>
-                  </div>
+          {Array.isArray(veto) && veto.length > 0 ? (
+            <Carousel
+              showArrows={true}
+              showStatus={false}
+              showThumbs={false}
+              selectedItem={currentIndex}
+              emulateTouch={true}
+              infiniteLoop={true}
+              centerMode={true}
+              centerSlidePercentage={33.33} // Set the percentage based on your design
+            >
+              {veto.map((vet) => (
+                <div key={vet.id}>
+                  <VetCard key={vet.id} mini={vet} />
                 </div>
               ))}
-          </div>
+            </Carousel>
+          ) : (
+            <p>No veterinarians available</p>
+          )}
         </div>
       </div>
       {/* Team End */}
@@ -538,16 +478,29 @@ const Homepage = () => {
               <p className="mb-4">
                 You can contact us via email or call us on the +216 98765432
               </p>
+
               <p className="mb-2">
-                <i className="fa fa-map-marker-alt text-primary me-3" />
+                <img
+                  src="https://cdn.countryflags.com/thumbs/tunisia/flag-round-250.png"
+                  alt="Location Icon"
+                  className="icon"
+                />
                 Tunis, Tunisia
               </p>
               <p className="mb-2">
-                <i className="fa fa-envelope text-primary me-3" />
+                <img
+                  src="https://w7.pngwing.com/pngs/799/918/png-transparent-mail-google-gmail-google-s-logo-icon.png"
+                  alt="Email Icon"
+                  className="icon"
+                />
                 vetopro@gmail.com
               </p>
               <p className="mb-0">
-                <i className="fa fa-phone-alt text-primary me-3" />
+                <img
+                  src="https://cdn.iconscout.com/icon/free/png-256/free-phone-1559-461603.png"
+                  alt="Phone Icon"
+                  className="icon"
+                />
                 +216 98765432
               </p>
             </div>
@@ -560,19 +513,19 @@ const Homepage = () => {
                   <i className="fa fa-angle-right me-2" />
                   Home
                 </a>
-                <a className="text-light mb-2" href="#">
+                <a className="text-light mb-2" href="#about">
                   <i className="fa fa-angle-right me-2" />
                   About Us
                 </a>
-                <a className="text-light mb-2" href="#">
+                <a className="text-light mb-2" href="#services">
                   <i className="fa fa-angle-right me-2" />
                   Our Services
                 </a>
-                <a className="text-light mb-2" href="#">
+                <a className="text-light mb-2" href="#team">
                   <i className="fa fa-angle-right me-2" />
                   Meet The Team
                 </a>
-                <a className="text-light mb-2" href="#">
+                <a className="text-light mb-2" href="#blog">
                   <i className="fa fa-angle-right me-2" />
                   Latest Blog
                 </a>
@@ -591,19 +544,19 @@ const Homepage = () => {
                   <i className="fa fa-angle-right me-2" />
                   Home
                 </a>
-                <a className="text-light mb-2" href="#">
+                <a className="text-light mb-2" href="#about">
                   <i className="fa fa-angle-right me-2" />
                   About Us
                 </a>
-                <a className="text-light mb-2" href="#">
+                <a className="text-light mb-2" href="#services">
                   <i className="fa fa-angle-right me-2" />
                   Our Services
                 </a>
-                <a className="text-light mb-2" href="#">
+                <a className="text-light mb-2" href="#team">
                   <i className="fa fa-angle-right me-2" />
                   Meet The Team
                 </a>
-                <a className="text-light mb-2" href="#">
+                <a className="text-light mb-2" href="#blog">
                   <i className="fa fa-angle-right me-2" />
                   Latest Blog
                 </a>
