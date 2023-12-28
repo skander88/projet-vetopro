@@ -40,7 +40,7 @@
   .form-control,
   textarea {
 	max-width: 400px;
-	background-color: #000;
+	background-color: rgb(255, 255, 255);
 	color: #fff;
 	letter-spacing: 1px;
   }
@@ -283,6 +283,12 @@
   }
   .seventy-percent {
 	width: 140%;
+	background-color: #fff;
+	color: #000;
+  }
+  .seventy-percent:hover {
+	background-color: #fff;
+	color: #000;
   }
   
   

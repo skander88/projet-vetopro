@@ -10,6 +10,7 @@ import PrivateRoute from "./components/privateRoute/PrivateRoute";
 //import AnnonceAdd from "./components/annonces/AnnonceCard";
 import Homepage from "./components/homepage/Homepage";
 import PrivateRoute2 from "./components/privateRoute/PrivateRoute2";
+import UpdateVet from "./components/Veterinaires/UpdateVet";
 
 function App() {
   return (
@@ -24,7 +25,8 @@ function App() {
         <Route path="/loginClient" element={<Logincl />} />
         <Route path="/pasRegis" element={<PasRegis />} />
         <Route path="/paslogin" element={<PasLogin />} />
-        <Route path="/app/privateRoute" element={<PrivateRoute />} />
+
+        <Route path="/app/privateRoute2" element={<PrivateRoute2 />} />
 
         {/*<Route path="/Add" element={<Add />} />*/}
       </Routes>
@@ -32,7 +34,8 @@ function App() {
       <Routes>
         <Route path="/registerVet" element={<RegisterVet />} />
         <Route path="/loginVet" element={<Login />} />
-        <Route path="/app/privateRoute2" element={<PrivateRoute2 />} />
+        <Route path="/app/privateRoute" element={<PrivateRoute />} />
+        <Route path="/profilVet" element={<UpdateVet />} />
       </Routes>
     </div>
   );

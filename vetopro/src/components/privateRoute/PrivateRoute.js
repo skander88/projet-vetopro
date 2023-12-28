@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
 import Login from "../login/Login";
@@ -7,6 +7,7 @@ import { setVet } from "../../store/vetSlice";
 import "../homepage/Homepage.css";
 import "../homepage/Homepage2.css";
 import NvAnnonce from "../annonces/NvAnnonce";
+import UpdateVet from "../Veterinaires/UpdateVet";
 
 const PrivateRoute2 = () => {
   const dispatch = useDispatch();
@@ -52,7 +53,7 @@ const PrivateRoute2 = () => {
                     style={{ pointerEvents: "none" }}
                   >
                     <img
-                      src="logo.png"
+                      src="/logo.png"
                       alt="Vétopro Logo"
                       style={{ width: "120px" }}
                     />
@@ -72,7 +73,11 @@ const PrivateRoute2 = () => {
                     <a href="#" className="nav-item nav-link">
                       Home
                     </a>
-                    <a href="#modif" className="nav-item nav-link">
+                    <a
+                      href="#"
+                      className="nav-item nav-link"
+                      onClick={() => navigate("/profilVet")}
+                    >
                       Modifier mon profil
                     </a>
                     <a href="#ajout" className="nav-item nav-link">

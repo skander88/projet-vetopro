@@ -1,9 +1,4 @@
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
-
-.bodyprofile{
-    margin-top:20px;
+.bodyup{margin-top:20px;
     background-color:#f2f6fc;
     color:#69707a;
     }
@@ -35,7 +30,7 @@
         font-size: 0.875rem;
         font-weight: 400;
         line-height: 1;
-        color: #69707a;
+        color: #000000;
         background-color: #fff;
         background-clip: padding-box;
         border: 1px solid #c5ccd6;
@@ -45,12 +40,12 @@
         border-radius: 0.35rem;
         transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
     }
-/*
+    
     .nav-borders .nav-link.active {
         color: #0061f2;
         border-bottom-color: #0061f2;
-    } /
-    / .nav-borders .nav-link {
+    }
+    .nav-borders .nav-link {
         color: #69707a;
         border-bottom-width: 0.125rem;
         border-bottom-style: solid;
@@ -61,15 +56,4 @@
         padding-right: 0;
         margin-left: 1rem;
         margin-right: 1rem;
-    } */
-
-
-    .Container {
-        display: flex;
-
-      }
-
-      .designe{
-        width: 70%;
-        height: 30%;
-      }
+    }
